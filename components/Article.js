@@ -114,3 +114,62 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+const articles = document.querySelector(".articles");
+
+function articleMaker(articleAttrs) {
+  const {
+    title,
+    date,
+    firstParagraph,
+    secondParagraph,
+    thirdParagraph,
+  } = articleAttrs;
+
+  const article = document.createElement('div');
+  const titleH2 = document.createElement('h2');
+  const dateP = document.createElement('p');
+  const p1 = document.createElement('p');
+  const p2 = document.createElement('p');
+  const p3 = document.createElement('p');
+  const btn = document.createElement('span');
+  
+  article.appendChild(titleH2);
+  article.appendChild(dateP);
+  article.appendChild(p1);
+  article.appendChild(p2);
+  article.appendChild(p3);
+  article.appendChild(btn);
+
+  article.classList.add('article');
+  dateP.classList.add('date');
+  btn.classList.add('expandButton');
+
+  titleH2.textContent = title;
+  dateP.textContent = date;
+  p1.textContent = firstParagraph;
+  p2.textContent = secondParagraph;
+  p3.textContent = thirdParagraph;
+  btn.textContent = '+ expand this article';
+
+  btn.addEventListener('click', (e) => {
+    article.classList.toggle('article-open');
+  });
+
+  return article;
+}
+
+data.map((attr => {
+  const article = articleMaker(attr);
+  articles.appendChild(article);
+}));
+
+const myArticle = articleMaker({
+  title: "My Article",
+  date: "11/04/2020",
+  firstParagraph: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  secondParagraph: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  thirdParagraph: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+});
+
+articles.appendChild(myArticle);
